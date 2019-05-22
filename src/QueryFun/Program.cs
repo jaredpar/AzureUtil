@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace QueryFun
 {
@@ -62,7 +63,17 @@ namespace QueryFun
         private static async Task Fun()
         { 
             var server = new AzureServer(Organization);
-            var builds = await server.ListBuild("public", definitions: new[] { 15 }, top: 10);
+            var project = "public";
+            var builds = await server.ListBuild(project, definitions: new[] { 15 }, top: 10);
+            foreach (var build in builds)
+            {
+                Console.WriteLine($"{build.Id} {build.Uri}");
+                var artifacts = await server.ListArtifacts(project, build.Id);
+                foreach (var artifact in artifacts)
+                {
+                    Console.WriteLine($"\t{artifact.Id} {artifact.Name} {artifact.Resource.Type}");
+                }
+            }
         }
     }
 }

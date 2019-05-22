@@ -116,7 +116,7 @@ namespace Query.Util
     /// </summary>
     public sealed class BuildRepository
     {
-
+        // TODO
     }
 
     /// <summary>
@@ -124,7 +124,7 @@ namespace Query.Util
     /// </summary>
     public enum QueueOptions
     {
-
+        // TODO
     }
 
     /// <summary>
@@ -132,7 +132,7 @@ namespace Query.Util
     /// </summary>
     public sealed class AgentPoolQueue
     {
-
+        // TODO
     }
 
     /// <summary>
@@ -140,7 +140,7 @@ namespace Query.Util
     /// </summary>
     public sealed class PropertiesCollection
     {
-
+        // TODO
     }
 
     /// <summary>
@@ -168,7 +168,7 @@ namespace Query.Util
     /// </summary>
     public sealed class DefinitionReference
     {
-
+        // TODO
     }
 
     /// <summary>
@@ -176,7 +176,7 @@ namespace Query.Util
     /// </summary>
     public sealed class IdentityRef
     {
-
+        // TODO
     }
 
     /// <summary>
@@ -184,7 +184,7 @@ namespace Query.Util
     /// </summary>
     public sealed class TaskOrchestrationPlanReference
     {
-
+        // TODO
     }
 
     /// <summary>
@@ -192,7 +192,7 @@ namespace Query.Util
     /// </summary>
     public sealed class ValidationResult
     {
-
+        // TODO
     }
 
     /// <summary>
@@ -200,7 +200,7 @@ namespace Query.Util
     /// </summary>
     public sealed class TeamProjectReference
     {
-
+        // TODO
     }
 
     /// <summary>
@@ -339,5 +339,32 @@ namespace Query.Util
         public string Id { get; set; }
         public string Name { get; set; }
         public string Version { get; set; }
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/artifacts/get%20artifact?view=azure-devops-rest-5.0#buildartifact
+    /// </summary>
+    public sealed class BuildArtifact
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public ArtifactResource Resource { get; set; }
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/artifacts/get%20artifact?view=azure-devops-rest-5.0#artifactresource
+    /// </summary>
+    public sealed class ArtifactResource
+    {
+        public string Data { get; set; }
+        public string DownloadUrl { get; set; }
+        public object Properties { get; set; }
+        public string Type { get; set; }
+
+        /// <summary>
+        /// The full http link to the resource
+        /// </summary>
+        public string Url { get; set; }
+
     }
 }

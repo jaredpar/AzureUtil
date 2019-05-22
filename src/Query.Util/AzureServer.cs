@@ -132,7 +132,6 @@ namespace Query.Util
                 builder.Append($"changeId={changeId}&");
             }
 
-            builder.Append($"api-version=5.0");
             return await GetJsonResult(builder.ToString());
         }
 
@@ -146,6 +145,20 @@ namespace Query.Util
         {
             var json = await GetTimelineRaw(project, buildId, timelineId, changeId);
             return JsonConvert.DeserializeObject<Timeline>(json);
+        }
+
+        public async Task<string> ListArtifactsRaw(string project, int buildId)
+        {
+            var builder = GetProjectApiRootBuilder(project);
+            builder.Append($"/build/builds/{buildId}/artifacts?api-version=5.0");
+            return await GetJsonResult(builder.ToString());
+        }
+
+        public async Task<BuildArtifact[]> ListArtifacts(string project, int buildId)
+        {
+            var root = JObject.Parse(await ListArtifactsRaw(project, buildId));
+            var array = (JArray)root["value"];
+            return array.ToObject<BuildArtifact[]>();
         }
 
         private StringBuilder GetProjectApiRootBuilder(string project)
