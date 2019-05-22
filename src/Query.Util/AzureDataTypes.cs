@@ -7,15 +7,209 @@ using System.Text;
 
 namespace Query.Util
 {
-    public sealed class BuildData
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#build
+    /// </summary>
+    public sealed class Build
     {
-        public int Id { get; set; }
         public string BuildNumber { get; set; }
-        [JsonProperty(PropertyName = "uri")]
-        public string BuildUri { get; set; }
-        public string Status { get; set; }
+        public int BuildNumberRevision { get; set; }
+        public BuildController BuildController { get; set; }
+        public DefinitionReference Definition { get; set; }
+        public bool Deleted { get; set; }
+        public string DeletedDate { get; set; }
+        public string DeletedReason { get; set; }
+        public Demand[] Demands { get; set; }
+        public string FinishTime { get; set; }
+        public int Id { get; set; }
+        public bool KeepForever { get; set; }
+        public IdentityRef LastChangedBy { get; set; }
+        public string LastChangedDate { get; set; }
+        public BuildLogReference Logs { get; set; }
+        public TaskOrchestrationPlanReference OrchestrationPlan { get; set; }
+        public string Parameters { get; set; }
+        public TaskOrchestrationPlanReference[] Plans { get; set; }
+        public QueuePriority Priority { get; set; }
+        public TeamProjectReference Project { get; set; }
+        public PropertiesCollection Properties { get; set; }
+        public string Quality { get; set; }
+        public AgentPoolQueue Queue { get; set; }
+        public QueueOptions QueueOptions { get; set; }
+        public int QueuePosition { get; set; }
+        public string QueueTime { get; set; }
+        public BuildReason Reason { get; set; }
+        public BuildRepository Repository { get; set; }
+        public IdentityRef RequestedBy { get; set; }
+        public IdentityRef RequestedFor { get; set; }
+        public BuildResult Result { get; set; }
+        public bool RetainedByRelease { get; set; }
+        public string SourceBranch { get; set; }
+        public string SourceVersion { get; set; }
+        public string StartTime { get; set; }
+        public BuildStatus Status { get; set; }
+        public string[] Tags { get; set; }
+        public object TriggerInfo { get; set; }
+        public Build TriggeredByBuild { get; set; }
+        public string Uri { get; set; }
+        public string Url { get; set; }
+        public BuildRequestValidationResult[] ValidationResults { get; set; }
 
         public override string ToString() => $"Id: {Id} BuildNumber: {BuildNumber}";
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#buildreason
+    /// </summary>
+    public enum BuildReason
+    {
+        All,
+        BatchedCI,
+        BuildCompletion,
+        CheckInShelveset,
+        IndividualCI,
+        Manual,
+        None,
+        PullRequest,
+        Schedule,
+        Triggered,
+        UserCreated,
+        ValidateShelveset
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#buildresult
+    /// </summary>
+    public enum BuildResult
+    {
+        Canceled,
+        Failed,
+        None,
+        PartiallySucceeded,
+        Succeeded
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#buildstatus
+    /// </summary>
+    public enum BuildStatus
+    {
+        All,
+        Cancelling,
+        Completed,
+        InProgress,
+        None,
+        NotStarted,
+        Postponed
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#buildstatus
+    /// </summary>
+    public sealed class BuildRequestValidationResult
+    {
+        public string Message { get; set; }
+        public ValidationResult Result { get; set; }
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#buildreason
+    /// </summary>
+    public sealed class BuildRepository
+    {
+
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#queueoptions
+    /// </summary>
+    public enum QueueOptions
+    {
+
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#agentpoolqueue
+    /// </summary>
+    public sealed class AgentPoolQueue
+    {
+
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#propertiescollection
+    /// </summary>
+    public sealed class PropertiesCollection
+    {
+
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#queuepriority
+    /// </summary>
+    public enum QueuePriority
+    {
+        AboveNormal,
+        BelowNormal,
+        High,
+        Low,
+        Normal
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#buildcontroller
+    /// </summary>
+    public sealed class BuildController
+    {
+        // TODO
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#definitionreference
+    /// </summary>
+    public sealed class DefinitionReference
+    {
+
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#identityref
+    /// </summary>
+    public sealed class IdentityRef
+    {
+
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#taskorchestrationplanreference
+    /// </summary>
+    public sealed class TaskOrchestrationPlanReference
+    {
+
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#validationresult
+    /// </summary>
+    public sealed class ValidationResult
+    {
+
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#teamprojectreference
+    /// </summary>
+    public sealed class TeamProjectReference
+    {
+
+    }
+
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0#demand
+    /// </summary>
+    public sealed class Demand
+    {
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 
     /// <summary>

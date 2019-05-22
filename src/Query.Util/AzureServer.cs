@@ -54,11 +54,11 @@ namespace Query.Util
         /// <summary>
         /// https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.0
         /// </summary>
-        public async Task<BuildData[]> ListBuild(string project, IEnumerable<int> definitions = null, int? top = null)
+        public async Task<Build[]> ListBuild(string project, IEnumerable<int> definitions = null, int? top = null)
         {
             var root = JObject.Parse(await ListBuildRaw(project, definitions, top));
             var array = (JArray)root["value"];
-            return array.ToObject<BuildData[]>();
+            return array.ToObject<Build[]>();
         }
 
         public async Task<string> GetBuildLogsRaw(string project, int buildId)

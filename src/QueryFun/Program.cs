@@ -11,6 +11,7 @@ namespace QueryFun
 
         public static async Task Main(string[] args)
         {
+            await Fun();
             await DumpTimeline("public", 196140);
         }
 
@@ -61,13 +62,7 @@ namespace QueryFun
         private static async Task Fun()
         { 
             var server = new AzureServer(Organization);
-            var project = "public";
-            foreach (var build in await server.ListBuild(project, definitions: new[] { 15 }, top: 10))
-            {
-                Console.WriteLine($"{build.Id} {build.BuildNumber} {build.BuildUri}");
-                var buildLogs = await server.GetBuildLogs(project, build.Id);
-                Console.WriteLine($"{buildLogs.Length} logs");
-            }
+            var builds = await server.ListBuild("public", definitions: new[] { 15 }, top: 10);
         }
     }
 }
